@@ -1805,7 +1805,7 @@ unsigned AllocateDxilConstantBuffer(
       continue;
 
     unsigned size = C->GetRangeSize();
-    llvm::Type *Ty = C->GetGlobalSymbol()->getType()->getPointerElementType();
+    llvm::Type *Ty = C->GetHLSLType()->getPointerElementType();
     auto fieldAnnotation = constVarAnnotationMap.at(C->GetGlobalSymbol());
     bool bRowMajor = HLMatrixType::isa(Ty)
                          ? fieldAnnotation.GetMatrixAnnotation().Orientation ==
@@ -1906,7 +1906,7 @@ bool CreateCBufferVariable(HLCBuffer &CB, HLModule &HLM, llvm::Type *HandleTy) {
     if (!GV->use_empty())
       bUsed = true;
     // Global variable must be pointer type.
-    llvm::Type *Ty = GV->getType()->getPointerElementType();
+    llvm::Type *Ty = C->GetHLSLType()->getPointerElementType();
     Elements.emplace_back(Ty);
   }
   // Don't create CBuffer variable for unused cbuffer.
@@ -1942,9 +1942,8 @@ bool CreateCBufferVariable(HLCBuffer &CB, HLModule &HLM, llvm::Type *HandleTy) {
     // array.
     DXASSERT(CB.GetConstants().size() == 1,
              "ConstantBuffer should have 1 constant");
-    Value *GV = CB.GetConstants()[0]->GetGlobalSymbol();
     llvm::Type *CBEltTy =
-        GV->getType()->getPointerElementType()->getArrayElementType();
+        CB.GetConstants()[0]->GetHLSLType()->getPointerElementType()->getArrayElementType();
     cbIndexDepth = 1;
     while (CBEltTy->isArrayTy()) {
       CBEltTy = CBEltTy->getArrayElementType();
@@ -2388,6 +2387,7 @@ void CollectCtorFunctions(llvm::Module &M, llvm::StringRef globalName,
 
   DenseSet<Function *> Callers = CollectExternalFunctionCallers(M);
 
+  bool allEvaluated = true;
   for (User::op_iterator i = CA->op_begin(), e = CA->op_end(); i != e; ++i) {
     if (isa<ConstantAggregateZero>(*i))
       continue;
@@ -2408,6 +2408,7 @@ void CollectCtorFunctions(llvm::Module &M, llvm::StringRef globalName,
         // Try to build imm initilizer.
         // If not work, add global call to entry func.
         if (BuildImmInit(F) == false) {
+          allEvaluated = false;
           if (IsValidCtorFunction(F, Callers)) {
             Ctors.emplace_back(F);
           } else {
@@ -2419,6 +2420,12 @@ void CollectCtorFunctions(llvm::Module &M, llvm::StringRef globalName,
                  "else invalid Global constructor function");
       }
     }
+  }
+
+  // If all globals constructors are replaced with initializers, just get rid
+  // of the GV.
+  if (allEvaluated) {
+    GV->eraseFromParent();
   }
 }
 

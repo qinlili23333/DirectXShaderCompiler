@@ -287,9 +287,7 @@ public:
   TEST_METHOD(BasicTriangleTest);
   TEST_METHOD(BasicTriangleOpTest);
 
-  BEGIN_TEST_METHOD(BasicTriangleOpTestHalf)
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.2
-  END_TEST_METHOD()
+  TEST_METHOD(BasicTriangleOpTestHalf);
 
   TEST_METHOD(OutOfBoundsTest);
   TEST_METHOD(SaturateTest);
@@ -316,14 +314,10 @@ public:
   TEST_METHOD(DynamicResourcesTest)
   TEST_METHOD(QuadReadTest)
 
-  BEGIN_TEST_METHOD(CBufferTestHalf)
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.2
-  END_TEST_METHOD()
+  TEST_METHOD(CBufferTestHalf);
 
   TEST_METHOD(BasicShaderModel61);
-  BEGIN_TEST_METHOD(BasicShaderModel63)
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.3
-  END_TEST_METHOD()
+  TEST_METHOD(BasicShaderModel63);
 
   BEGIN_TEST_METHOD(WaveIntrinsicsActiveIntTest)
     TEST_METHOD_PROPERTY(L"DataSource", L"Table:ShaderOpArithTable.xml#WaveIntrinsicsActiveIntTable")
@@ -362,15 +356,12 @@ public:
 
   BEGIN_TEST_METHOD(UnaryHalfOpTest)
     TEST_METHOD_PROPERTY(L"DataSource", L"Table:ShaderOpArithTable.xml#UnaryHalfOpTable")
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.2
   END_TEST_METHOD()
   BEGIN_TEST_METHOD(BinaryHalfOpTest)
     TEST_METHOD_PROPERTY(L"DataSource", L"Table:ShaderOpArithTable.xml#BinaryHalfOpTable")
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.2
   END_TEST_METHOD()
   BEGIN_TEST_METHOD(TertiaryHalfOpTest)
     TEST_METHOD_PROPERTY(L"DataSource", L"Table:ShaderOpArithTable.xml#TertiaryHalfOpTable")
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.2
   END_TEST_METHOD()
 
   BEGIN_TEST_METHOD(UnaryIntOpTest)
@@ -395,28 +386,22 @@ public:
 
   BEGIN_TEST_METHOD(UnaryInt16OpTest)
     TEST_METHOD_PROPERTY(L"DataSource", L"Table:ShaderOpArithTable.xml#UnaryInt16OpTable")
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.2
   END_TEST_METHOD()
   BEGIN_TEST_METHOD(BinaryInt16OpTest)
     TEST_METHOD_PROPERTY(L"DataSource", L"Table:ShaderOpArithTable.xml#BinaryInt16OpTable")
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.2
   END_TEST_METHOD()
   BEGIN_TEST_METHOD(TertiaryInt16OpTest)
     TEST_METHOD_PROPERTY(L"DataSource", L"Table:ShaderOpArithTable.xml#TertiaryInt16OpTable")
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.2
   END_TEST_METHOD()
 
   BEGIN_TEST_METHOD(UnaryUint16OpTest)
     TEST_METHOD_PROPERTY(L"DataSource", L"Table:ShaderOpArithTable.xml#UnaryUint16OpTable")
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.2
   END_TEST_METHOD()
   BEGIN_TEST_METHOD(BinaryUint16OpTest)
     TEST_METHOD_PROPERTY(L"DataSource", L"Table:ShaderOpArithTable.xml#BinaryUint16OpTable")
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.2
   END_TEST_METHOD()
   BEGIN_TEST_METHOD(TertiaryUint16OpTest)
     TEST_METHOD_PROPERTY(L"DataSource", L"Table:ShaderOpArithTable.xml#TertiaryUint16OpTable")
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.2
   END_TEST_METHOD()
 
   BEGIN_TEST_METHOD(DotTest)
@@ -441,12 +426,10 @@ public:
 
   BEGIN_TEST_METHOD(DenormBinaryFloatOpTest)
     TEST_METHOD_PROPERTY(L"DataSource", L"Table:ShaderOpArithTable.xml#DenormBinaryFloatOpTable")
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.2
   END_TEST_METHOD()
 
   BEGIN_TEST_METHOD(DenormTertiaryFloatOpTest)
     TEST_METHOD_PROPERTY(L"DataSource", L"Table:ShaderOpArithTable.xml#DenormTertiaryFloatOpTable")
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.2
   END_TEST_METHOD()
 
   TEST_METHOD(BarycentricsTest);
@@ -454,36 +437,20 @@ public:
   TEST_METHOD(ComputeRawBufferLdStI32);
   TEST_METHOD(ComputeRawBufferLdStFloat);
 
-  BEGIN_TEST_METHOD(ComputeRawBufferLdStI64)
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.3
-  END_TEST_METHOD()
-  BEGIN_TEST_METHOD(ComputeRawBufferLdStDouble)
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.3
-  END_TEST_METHOD()
+  TEST_METHOD(ComputeRawBufferLdStI64);
+  TEST_METHOD(ComputeRawBufferLdStDouble);
     
-  BEGIN_TEST_METHOD(ComputeRawBufferLdStI16)
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // This test is disabled because of a bug in WARP; TODO: enable once the bug is fixed
-  END_TEST_METHOD()
-  BEGIN_TEST_METHOD(ComputeRawBufferLdStHalf)
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // This test is disabled because of a bug in WARP; TODO: enable once the bug is fixed
-  END_TEST_METHOD()
+  TEST_METHOD(ComputeRawBufferLdStI16);
+  TEST_METHOD(ComputeRawBufferLdStHalf);
 
   TEST_METHOD(GraphicsRawBufferLdStI32);
   TEST_METHOD(GraphicsRawBufferLdStFloat);
 
-  BEGIN_TEST_METHOD(GraphicsRawBufferLdStI64)
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.3
-  END_TEST_METHOD()
-  BEGIN_TEST_METHOD(GraphicsRawBufferLdStDouble)
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // Remove this line once warp supports this feature in Shader Model 6.3
-  END_TEST_METHOD()
+  TEST_METHOD(GraphicsRawBufferLdStI64);
+  TEST_METHOD(GraphicsRawBufferLdStDouble);
 
-  BEGIN_TEST_METHOD(GraphicsRawBufferLdStI16)
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // This test is disabled because of a bug in WARP; TODO: enable once the bug is fixed
-  END_TEST_METHOD()
-  BEGIN_TEST_METHOD(GraphicsRawBufferLdStHalf)
-    TEST_METHOD_PROPERTY(L"Priority", L"2") // This test is disabled because of a bug in WARP; TODO: enable once the bug is fixed
-  END_TEST_METHOD()
+  TEST_METHOD(GraphicsRawBufferLdStI16);
+  TEST_METHOD(GraphicsRawBufferLdStHalf);
 
   BEGIN_TEST_METHOD(PackUnpackTest)
     TEST_METHOD_PROPERTY(L"DataSource", L"Table:ShaderOpArithTable.xml#PackUnpackOpTable")
@@ -1161,6 +1128,17 @@ public:
     BOOL Int64ShaderOps;
   };
 
+  bool IsDeviceBasicAdapter(ID3D12Device *pDevice) {
+    CComPtr<IDXGIFactory4> factory;
+    VERIFY_SUCCEEDED(CreateDXGIFactory1(IID_PPV_ARGS(&factory)));
+    LUID adapterID = pDevice->GetAdapterLuid();
+    CComPtr<IDXGIAdapter1> adapter;
+    factory->EnumAdapterByLuid(adapterID, IID_PPV_ARGS(&adapter));
+    DXGI_ADAPTER_DESC1 AdapterDesc;
+    VERIFY_SUCCEEDED(adapter->GetDesc1(&AdapterDesc));
+    return (AdapterDesc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE);
+  }
+
   bool DoesDeviceSupportInt64(ID3D12Device *pDevice) {
     D3D12_FEATURE_DATA_D3D12_OPTIONS1 O;
     if (FAILED(pDevice->CheckFeatureSupport((D3D12_FEATURE)D3D12_FEATURE_D3D12_OPTIONS1, &O, sizeof(O))))
@@ -1220,11 +1198,9 @@ public:
 #endif
   }
 
-  // Replace with appropriate WDK check when available
-#define SM66_RUNTIME_SUPPORT 0
 
   bool DoesDeviceSupportMeshAmpDerivatives(ID3D12Device *pDevice) {
-#if SM66_RUNTIME_SUPPORT
+#if defined(NTDDI_WIN10_FE) && WDK_NTDDI_VERSION >= NTDDI_WIN10_FE
     D3D12_FEATURE_DATA_D3D12_OPTIONS7 O7;
     D3D12_FEATURE_DATA_D3D12_OPTIONS9 O9;
     if (FAILED(pDevice->CheckFeatureSupport((D3D12_FEATURE)D3D12_FEATURE_D3D12_OPTIONS7, &O7, sizeof(O7))) ||
@@ -1239,7 +1215,7 @@ public:
   }
 
   bool DoesDeviceSupportTyped64Atomics(ID3D12Device *pDevice) {
-#if SM66_RUNTIME_SUPPORT
+#if defined(NTDDI_WIN10_FE) && WDK_NTDDI_VERSION >= NTDDI_WIN10_FE
     D3D12_FEATURE_DATA_D3D12_OPTIONS9 O9;
     if (FAILED(pDevice->CheckFeatureSupport((D3D12_FEATURE)D3D12_FEATURE_D3D12_OPTIONS9, &O9, sizeof(O9))))
       return false;
@@ -1251,7 +1227,7 @@ public:
   }
 
   bool DoesDeviceSupportShared64Atomics(ID3D12Device *pDevice) {
-#if SM66_RUNTIME_SUPPORT
+#if defined(NTDDI_WIN10_FE) && WDK_NTDDI_VERSION >= NTDDI_WIN10_FE
     D3D12_FEATURE_DATA_D3D12_OPTIONS9 O9;
     if (FAILED(pDevice->CheckFeatureSupport((D3D12_FEATURE)D3D12_FEATURE_D3D12_OPTIONS9, &O9, sizeof(O9))))
       return false;
@@ -2963,6 +2939,13 @@ void ExecutionTest::BasicTriangleTestSetup(LPCSTR ShaderOpName, LPCWSTR FileName
   if (!CreateDevice(&pDevice, testModel))
     return;
 
+  // As this is used, 6.2 requirement always comes with requiring native 16-bit ops
+  if (testModel == D3D_SHADER_MODEL_6_2 && !DoesDeviceSupportNative16bitOps(pDevice)) {
+    WEX::Logging::Log::Comment(L"Device does not support native 16-bit operations.");
+    WEX::Logging::Log::Result(WEX::Logging::TestResults::Skipped);
+    return;
+  }
+
   std::shared_ptr<ShaderOpTestResult> test = RunShaderOpTest(pDevice, m_support, pStream, ShaderOpName, nullptr);
   MappedData data;
   D3D12_RESOURCE_DESC &D = test->ShaderOp->GetResourceByName("RTarget")->Desc;
@@ -3208,7 +3191,7 @@ TEST_F(ExecutionTest, QuadReadTest) {
   if (!CreateDevice(&pDevice))
     return;
 
-  if (GetTestParamUseWARP(UseWarpByDefault())) {
+  if (GetTestParamUseWARP(UseWarpByDefault()) || IsDeviceBasicAdapter(pDevice)) {
     WEX::Logging::Log::Comment(L"WARP does not support QuadRead in compute shaders.");
     WEX::Logging::Log::Result(WEX::Logging::TestResults::Skipped);
     return;
@@ -3305,7 +3288,7 @@ TEST_F(ExecutionTest, QuadReadTest) {
   }
 }
 
-void VerifySampleResults(const UINT *pPixels) {
+void VerifySampleResults(const UINT *pPixels, UINT width) {
   UINT xlod = 0;
   UINT ylod = 0;
   // Each pixel contains 4 samples and 4 LOD calculations.
@@ -3323,7 +3306,7 @@ void VerifySampleResults(const UINT *pPixels) {
   // in both directions might result in different levels for different locations
   // in the quad. So only comparisons between sample results and LOD calculations
   // and ensuring that the LOD increased and reaches the max can be tested reliably.
-  for (unsigned i = 0; i < 64; i++) {
+  for (unsigned i = 0; i < width; i++) {
     // CalculateLOD and Sample from texture with mip levels containing LOD index should match
     VERIFY_ARE_EQUAL(pPixels[4*i + 0], pPixels[4*i + 1]);
     VERIFY_ARE_EQUAL(pPixels[4*i + 2], pPixels[4*i + 3]);
@@ -3353,14 +3336,13 @@ TEST_F(ExecutionTest, ComputeSampleTest) {
 
   st::ShaderOp *pShaderOp = ShaderOpSet->GetShaderOp("ComputeSample");
 
-  D3D12_RESOURCE_DESC &texDesc = pShaderOp->GetResourceByName("T0")->Desc;
-  UINT texWidth = (UINT)texDesc.Width;
-  UINT texHeight = (UINT)texDesc.Height;
-
   // Initialize texture with the LOD number in each corresponding mip level
   auto SampleInitFn = [&](LPCSTR Name, std::vector<BYTE> &Data, st::ShaderOp *pShaderOp) {
                         UNREFERENCED_PARAMETER(pShaderOp);
                         VERIFY_ARE_EQUAL(0, _stricmp(Name, "T0"));
+                        D3D12_RESOURCE_DESC &texDesc = pShaderOp->GetResourceByName("T0")->Desc;
+                        UINT texWidth = (UINT)texDesc.Width;
+                        UINT texHeight = (UINT)texDesc.Height;
                         size_t size = sizeof(float) * texWidth * texHeight * 2;
                         Data.resize(size);
                         float *pPrimitives = (float *)Data.data();
@@ -3379,17 +3361,59 @@ TEST_F(ExecutionTest, ComputeSampleTest) {
                           texWidth >>= 1;
                         }
                       };
+  LPCSTR CS2 = nullptr, AS2 = nullptr, MS2 = nullptr;
+  for (st::ShaderOpShader &S : pShaderOp->Shaders) {
+    if (!strcmp(S.Name, "CS2")) CS2 = S.Name;
+    if (!strcmp(S.Name, "AS2")) AS2 = S.Name;
+    if (!strcmp(S.Name, "MS2")) MS2 = S.Name;
+  }
+
+  // Test 1D compute shader
   std::shared_ptr<ShaderOpTestResult> test = RunShaderOpTestAfterParse(pDevice, m_support, "ComputeSample", SampleInitFn, ShaderOpSet);
   MappedData data;
 
   test->Test->GetReadBackData("U0", &data);
   const UINT *pPixels = (UINT *)data.data();
 
-  VerifySampleResults(pPixels);
+  VerifySampleResults(pPixels, 84*4);
+
+  // Test 2D compute shader
+  pShaderOp->CS = CS2;
+
+  test = RunShaderOpTestAfterParse(pDevice, m_support, "ComputeSample", SampleInitFn, ShaderOpSet);
+
+  test->Test->GetReadBackData("U0", &data);
+  pPixels = (UINT *)data.data();
+
+  VerifySampleResults(pPixels, 84*4);
+
+
   if (DoesDeviceSupportMeshAmpDerivatives(pDevice)) {
     // Disable CS so mesh goes forward
     pShaderOp->CS = nullptr;
     test = RunShaderOpTestAfterParse(pDevice, m_support, "ComputeSample", SampleInitFn, ShaderOpSet);
+    test->Test->GetReadBackData("U1", &data);
+    pPixels = (UINT *)data.data();
+
+    VerifySampleResults(pPixels, 116);
+
+    test->Test->GetReadBackData("U2", &data);
+    pPixels = (UINT *)data.data();
+
+    VerifySampleResults(pPixels, 84);
+
+    pShaderOp->AS = AS2;
+    pShaderOp->MS = MS2;
+    test = RunShaderOpTestAfterParse(pDevice, m_support, "ComputeSample", SampleInitFn, ShaderOpSet);
+    test->Test->GetReadBackData("U1", &data);
+    pPixels = (UINT *)data.data();
+
+    VerifySampleResults(pPixels, 116);
+
+    test->Test->GetReadBackData("U2", &data);
+    pPixels = (UINT *)data.data();
+
+    VerifySampleResults(pPixels, 84);
   }
 }
 
@@ -7910,6 +7934,12 @@ TEST_F(ExecutionTest, PackUnpackTest) {
     }
 #endif
 
+    if (!DoesDeviceSupportNative16bitOps(pDevice)) {
+        WEX::Logging::Log::Comment(L"Device does not support native 16-bit operations.");
+        WEX::Logging::Log::Result(WEX::Logging::TestResults::Skipped);
+        return;
+    }
+
     int tableSize = sizeof(PackUnpackOpParameters) / sizeof(TableParameter);
     TableParameterHandler handler(PackUnpackOpParameters, tableSize);
 
@@ -8255,8 +8285,6 @@ void ExecutionTest::WaveSizeTest() {
   WEX::TestExecution::SetVerifyOutput verifySettings(WEX::TestExecution::VerifyOutputSettings::LogOnlyFailures);
 
   CComPtr<ID3D12Device> pDevice;
-  CComPtr<IStream> pStream;
-
   if (!CreateDevice(&pDevice, D3D_SHADER_MODEL_6_6)) {
     return;
   }
@@ -8268,9 +8296,6 @@ void ExecutionTest::WaveSizeTest() {
     return;
   }
 
-  // read shader config
-  ReadHlslDataIntoNewStream(L"ShaderOpArith.xml", &pStream);
-
   // Get supported wave sizes
   D3D12_FEATURE_DATA_D3D12_OPTIONS1 waveOpts;
   VERIFY_SUCCEEDED(pDevice->CheckFeatureSupport((D3D12_FEATURE)D3D12_FEATURE_D3D12_OPTIONS1, &waveOpts, sizeof(waveOpts)));
@@ -8280,6 +8305,12 @@ void ExecutionTest::WaveSizeTest() {
   DXASSERT_NOMSG(minWaveSize <= maxWaveSize);
   DXASSERT((minWaveSize & (minWaveSize - 1)) == 0, "must be a power of 2");
   DXASSERT((maxWaveSize & (maxWaveSize - 1)) == 0, "must be a power of 2");
+
+  // read shader config
+  CComPtr<IStream> pStream;
+  std::shared_ptr<st::ShaderOpSet> ShaderOpSet = std::make_shared<st::ShaderOpSet>();
+  ReadHlslDataIntoNewStream(L"ShaderOpArith.xml", &pStream);
+  st::ParseShaderOpSetFromStream(pStream, ShaderOpSet.get());
 
   // format shader source
   const char waveSizeTestShader[] =
@@ -8305,7 +8336,7 @@ void ExecutionTest::WaveSizeTest() {
     VERIFY_IS_TRUE(sprintf_s(compilerOptions, sizeof(compilerOptions), "-D WAVESIZE=%d", waveSize) != -1);
 
     // run the shader
-    std::shared_ptr<ShaderOpTestResult> test = RunShaderOpTest(pDevice, m_support, pStream, "WaveSizeTest",
+    std::shared_ptr<ShaderOpTestResult> test = RunShaderOpTestAfterParse(pDevice, m_support, "WaveSizeTest",
       [&](LPCSTR Name, std::vector<BYTE> &Data, st::ShaderOp *pShaderOp) {
       VERIFY_IS_TRUE((0 == strncmp(Name, "UAVBuffer0", 10)));
       pShaderOp->Shaders.at(0).Arguments = compilerOptions;
@@ -8314,7 +8345,7 @@ void ExecutionTest::WaveSizeTest() {
       VERIFY_IS_TRUE(sizeof(WaveSizeTestData)*MAX_WAVESIZE <= Data.size());
       WaveSizeTestData *pInData = (WaveSizeTestData *)Data.data();
       memset(&pInData, sizeof(WaveSizeTestData)*MAX_WAVESIZE, 0);
-    });
+    }, ShaderOpSet);
 
     // verify expected values
     MappedData dataUav;
@@ -8376,7 +8407,7 @@ bool AtomicResultMatches(const BYTE *uResults, uint64_t gold, size_t size) {
 
 // Used to duplicate the lower half bits into the upper half bits of an integer
 // To verify that the full value is being considered, many tests duplicate the results into the upper half
-#define SHIFT(val, bits) (((val)&((1ULL<<(bits))-1ULL)) | ((val) << (bits)))
+#define SHIFT(val, bits) (((val)&((1ULL<<(bits))-1ULL)) | ((uint64_t)(val) << (bits)))
 
 // Symbolic constants for the results
 #define ADD_IDX 0
@@ -8397,17 +8428,17 @@ bool AtomicResultMatches(const BYTE *uResults, uint64_t gold, size_t size) {
 // which is used to determine what the results should be. <bitSize> is the size in bits of
 // the produced results, either 32 or 64.
 void VerifyAtomicResults(const BYTE *uResults, const BYTE *sResults,
-                         const BYTE *pXchg, size_t stride, size_t maxIdx, size_t bitSize) {
+                         const BYTE *pXchg, size_t stride, uint64_t maxIdx, size_t bitSize) {
   // Each atomic test performs the test on the value in the lower half
   // and also duplicated in the upper half of the value. The SHIFT macros account for this.
   // This is to verify that the upper bits are considered
-  size_t shBits = bitSize/2;
+  uint64_t shBits = bitSize/2;
   size_t byteSize = bitSize/8;
 
   // Test ADD Operation
   // ADD just sums all the indices. The result should the sum of the highest and lowest indices
   // multiplied by half the number of sums.
-  size_t addResult = (maxIdx)*(maxIdx-1)/2;
+  uint64_t addResult = (maxIdx)*(maxIdx-1)/2;
   LogCommentFmt(L"Verifying %d-bit integer atomic add", bitSize);
   // For 32-bit values, the sum exceeds the 16 bit limit, so we can't duplicate
   // That's fine, the duplication is really for 64-bit values.
@@ -8433,10 +8464,10 @@ void VerifyAtomicResults(const BYTE *uResults, const BYTE *sResults,
   VERIFY_IS_TRUE(AtomicResultMatches(uResults + stride*UMAX_IDX, ~0ULL, byteSize)); // UMax
 
   // For signed min/max, the index just before the last will be bitflipped (maxIndex is always even).
-  // This is interpretted as -maxIndex and will be the lowest
+  // This is interpretted as -(maxIndex-1) and will be the lowest
   // The maxIndex will be unaltered and interpretted as the highest.
   LogCommentFmt(L"Verifying %d-bit integer atomic smin", bitSize);
-  VERIFY_IS_TRUE(AtomicResultMatches(sResults + stride*SMIN_IDX, SHIFT(-((int)maxIdx-1), shBits), byteSize)); // SMin
+  VERIFY_IS_TRUE(AtomicResultMatches(sResults + stride*SMIN_IDX, SHIFT(-((int64_t)maxIdx-1), shBits), byteSize)); // SMin
   LogCommentFmt(L"Verifying %d-bit integer atomic smax", bitSize);
   VERIFY_IS_TRUE(AtomicResultMatches(sResults + stride*SMAX_IDX, SHIFT(maxIdx-1, shBits), byteSize)); // SMax
 
@@ -8453,7 +8484,7 @@ void VerifyAtomicResults(const BYTE *uResults, const BYTE *sResults,
   // are bitflipped versions of each other.
   // Finding the most significant set bit by the max index or next power of two (pot)
   // gives us the pivot point for these results
-  size_t nextPot = 1ULL << (bitSize - 1);
+  uint64_t nextPot = 1ULL << (bitSize - 1);
   for (;nextPot && !((maxIdx-1) & (nextPot)); nextPot >>= 1) {}
   nextPot <<= 1;
   LogCommentFmt(L"Verifying %d-bit integer atomic and", bitSize);
@@ -8478,7 +8509,7 @@ void VerifyAtomicResults(const BYTE *uResults, const BYTE *sResults,
   // Each "pass" sets or clears the bits depending on what's already there.
   // if the number of the pass is odd, the bits are being unset and all above the mod position should be set.
   // If even, the bits are in the process of being set and bits below the mod position should be set.
-  size_t xorResult = ((1ULL<<((maxIdx)%(bitSize-1))) -1);
+  uint64_t xorResult = ((1ULL<<((maxIdx)%(bitSize-1))) -1);
 
   if (((maxIdx/(bitSize-1))&1)) {
     xorResult ^= ~0ULL;
@@ -8519,7 +8550,7 @@ void VerifyAtomicResults(const BYTE *uResults, const BYTE *sResults,
 }
 
 void VerifyAtomicsRawTest(std::shared_ptr<ShaderOpTestResult> test,
-                          size_t maxIdx, size_t bitSize) {
+                          uint64_t maxIdx, size_t bitSize) {
 
   size_t stride = 8;
   // struct mirroring that in the shader
@@ -8563,7 +8594,7 @@ void VerifyAtomicsRawTest(std::shared_ptr<ShaderOpTestResult> test,
 }
 
 void VerifyAtomicsTypedTest(std::shared_ptr<ShaderOpTestResult> test,
-                            size_t maxIdx, size_t bitSize) {
+                            uint64_t maxIdx, size_t bitSize) {
 
 
   size_t stride = 8;
@@ -8613,7 +8644,7 @@ void VerifyAtomicsTypedTest(std::shared_ptr<ShaderOpTestResult> test,
 }
 
 void VerifyAtomicsSharedTest(std::shared_ptr<ShaderOpTestResult> test,
-                             size_t maxIdx, size_t bitSize) {
+                             uint64_t maxIdx, size_t bitSize) {
 
   size_t stride = 8;
   MappedData uintData, xchgData;
@@ -8632,7 +8663,7 @@ void VerifyAtomicsSharedTest(std::shared_ptr<ShaderOpTestResult> test,
 }
 
 void VerifyAtomicsTest(std::shared_ptr<ShaderOpTestResult> test,
-                       size_t maxIdx, size_t bitSize) {
+                       uint64_t maxIdx, size_t bitSize) {
   VerifyAtomicsRawTest(test, maxIdx, bitSize);
   VerifyAtomicsTypedTest(test, maxIdx, bitSize);
 }
@@ -8866,8 +8897,8 @@ void VerifyAtomicFloatResults(const float *results) {
   // The sentinal value is 0.123, for which this compare is sufficient.
   VERIFY_IS_TRUE(results[0] >= 0.120 && results[0] < 0.125);
   // Start at 1 because 0 is just for NaN tests
-  for (size_t i = 1; i < 64; i++) {
-    VERIFY_ARE_EQUAL((int(results[i])/3)%63 + 1, (int)i);
+  for (int i = 1; i < 64; i++) {
+    VERIFY_ARE_EQUAL((int(results[i])/3)%63 + 1, i);
   }
 }
 
@@ -8901,8 +8932,8 @@ void VerifyAtomicsFloatTest(std::shared_ptr<ShaderOpTestResult> test) {
   const AtomicStuff *pStructData = (AtomicStuff *)Data.data();
   LogCommentFmt(L"Verifying float cmp/xchg atomic operations on RWStructuredBuffer resources");
   VERIFY_IS_TRUE(pStructData[0].fltEl[1] >= 0.120 && pStructData[0].fltEl[1] < 0.125);
-  for (size_t i = 1; i < 64; i++) {
-    VERIFY_ARE_EQUAL((int(pStructData[i].fltEl[1])/3)%63 + 1, (int)i);
+  for (int i = 1; i < 64; i++) {
+    VERIFY_ARE_EQUAL((int(pStructData[i].fltEl[1])/3)%63 + 1, i);
   }
 
   test->Test->GetReadBackData("U1", &Data);
@@ -9242,7 +9273,7 @@ TEST_F(ExecutionTest, HelperLaneTestWave) {
       continue;
     }
 
-    if (sm >= D3D_SHADER_MODEL_6_5) {
+    if (sm == D3D_SHADER_MODEL_6_5) {
       // Reassign shader stages to 6.5 versions
       LPCSTR CS65 = nullptr, VS65 = nullptr, PS65 = nullptr;
       for (st::ShaderOpShader& S : pShaderOp->Shaders) {
@@ -9253,6 +9284,17 @@ TEST_F(ExecutionTest, HelperLaneTestWave) {
       pShaderOp->CS = CS65;
       pShaderOp->VS = VS65;
       pShaderOp->PS = PS65;
+    } else if (sm == D3D_SHADER_MODEL_6_6) {
+      // Reassign shader stages to 6.6 versions
+      LPCSTR CS66 = nullptr, VS66 = nullptr, PS66 = nullptr;
+      for (st::ShaderOpShader& S : pShaderOp->Shaders) {
+        if (!strcmp(S.Name, "CS66")) CS66 = S.Name;
+        if (!strcmp(S.Name, "VS66")) VS66 = S.Name;
+        if (!strcmp(S.Name, "PS66")) PS66 = S.Name;
+      }
+      pShaderOp->CS = CS66;
+      pShaderOp->VS = VS66;
+      pShaderOp->PS = PS66;
     }
 
     const unsigned CS_INDEX = 0, VS_INDEX = 0, PS_INDEX = 1, PS_INDEX_AFTER_DISCARD = 2;

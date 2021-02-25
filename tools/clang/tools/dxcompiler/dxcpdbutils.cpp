@@ -26,6 +26,7 @@
 #include "llvm/Support/raw_ostream.h"
 
 #include "dxc/dxcapi.h"
+#include "dxc/dxcapi.internal.h"
 #include "dxc/dxcpix.h"
 #include "dxc/Support/microcom.h"
 #include "dxc/DxilContainer/DxilContainer.h"
@@ -37,6 +38,7 @@
 #include "dxc/Support/HLSLOptions.h"
 
 #include "dxcshadersourceinfo.h"
+#include "dxc/Support/dxcfilesystem.h"
 
 #include <vector>
 #include <locale>
@@ -78,6 +80,8 @@ static HRESULT CopyWstringToBSTR(const std::wstring &str, BSTR *pResult) {
 }
 
 static std::wstring NormalizePath(const WCHAR *path) {
+  std::wstring PathStorage;
+  dxcutil::MakeAbsoluteOrCurDirRelativeW(path, PathStorage);
   std::string FilenameStr8 = Unicode::UTF16ToUTF8StringOrThrow(path);
   llvm::SmallString<128> NormalizedPath;
   llvm::sys::path::native(FilenameStr8, NormalizedPath);
@@ -222,7 +226,8 @@ struct PdbRecompilerIncludeHandler : public IDxcIncludeHandler {
       return E_POINTER;
     *ppIncludeSource = nullptr;
 
-    auto it = m_FileMap.find(NormalizePath(pFilename));
+    std::wstring Filename = NormalizePath(pFilename);
+    auto it = m_FileMap.find(Filename);
     if (it == m_FileMap.end())
       return E_FAIL;
 
@@ -259,6 +264,10 @@ private:
   hlsl::DxilCompilerVersion m_VersionInfo;
   std::string m_VersionCommitSha;
   std::string m_VersionString;
+
+  // NOTE: This is not set to null by Reset() since it doesn't
+  // necessarily change across different PDBs.
+  CComPtr<IDxcCompiler3> m_pCompiler;
 
   struct ArgPair {
     std::wstring Name;
@@ -508,6 +517,11 @@ private:
           m_ArgPairs.push_back( std::move(newPair) );
         }
 
+        // Entry point might have been omitted. Set it to main by default.
+        if (m_EntryPoint.empty()) {
+          m_EntryPoint = L"main";
+        }
+
         // Sources
         for (unsigned i = 0; i < reader.GetSourcesCount(); i++) {
           hlsl::SourceInfoReader::Source source_data = reader.GetSource(i);
@@ -570,24 +584,25 @@ public:
   }
 
   HRESULT STDMETHODCALLTYPE Load(_In_ IDxcBlob *pPdbOrDxil) override {
-    DxcThreadMalloc TM(m_pMalloc);
-
-    ::llvm::sys::fs::MSFileSystem *msfPtr = nullptr;
-    IFT(CreateMSFileSystemForDisk(&msfPtr));
-    std::unique_ptr<::llvm::sys::fs::MSFileSystem> msf(msfPtr);
-  
-    ::llvm::sys::fs::AutoPerThreadSystem pts(msf.get());
-    IFTLLVM(pts.error_code());
 
     if (!pPdbOrDxil)
       return E_POINTER;
 
-    // Remove all the data
-    Reset();
-
-    m_InputBlob = pPdbOrDxil;
-
     try {
+      DxcThreadMalloc TM(m_pMalloc);
+
+      ::llvm::sys::fs::MSFileSystem *msfPtr = nullptr;
+      IFT(CreateMSFileSystemForDisk(&msfPtr));
+      std::unique_ptr<::llvm::sys::fs::MSFileSystem> msf(msfPtr);
+
+      ::llvm::sys::fs::AutoPerThreadSystem pts(msf.get());
+      IFTLLVM(pts.error_code());
+
+      // Remove all the data
+      Reset();
+
+      m_InputBlob = pPdbOrDxil;
+
       CComPtr<IStream> pStream;
       IFR(hlsl::CreateReadOnlyBlobStream(pPdbOrDxil, &pStream));
 
@@ -715,8 +730,8 @@ public:
       return m_InputBlob.QueryInterface(ppFullPDB);
     }
 
-    CComPtr<IDxcCompiler3> pCompiler;
-    IFR(DxcCreateInstance2(m_pMalloc, CLSID_DxcCompiler, IID_PPV_ARGS(&pCompiler)));
+    if (!m_pCompiler)
+      IFR(DxcCreateInstance2(m_pMalloc, CLSID_DxcCompiler, IID_PPV_ARGS(&m_pCompiler)));
 
     DxcThreadMalloc TM(m_pMalloc);
 
@@ -754,7 +769,7 @@ public:
     IFR(main_file->GetEncoding(&bEndodingKnown, &source_buf.Encoding));
 
     CComPtr<IDxcResult> pResult;
-    IFR(pCompiler->Compile(&source_buf, new_args.data(), new_args.size(), pIncludeHandler, IID_PPV_ARGS(&pResult)));
+    IFR(m_pCompiler->Compile(&source_buf, new_args.data(), new_args.size(), pIncludeHandler, IID_PPV_ARGS(&pResult)));
 
     CComPtr<IDxcOperationResult> pOperationResult;
     IFR(pResult.QueryInterface(&pOperationResult));
@@ -830,6 +845,11 @@ public:
     result->m_Version = m_VersionInfo;
     result->m_VersionCommitSha = m_VersionCommitSha;
     *ppVersionInfo = result.Detach();
+    return S_OK;
+  }
+
+  virtual HRESULT STDMETHODCALLTYPE SetCompiler(_In_ IDxcCompiler3 *pCompiler) override {
+    m_pCompiler = pCompiler;
     return S_OK;
   }
 };
